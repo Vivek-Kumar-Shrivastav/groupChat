@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
+// WebSocket is a communication protocol that provides full-duplex communication channels over a single TCP connection, allowing for real-time data transfer between the server and clients.
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -24,6 +25,8 @@ const chatsRoute = require("./routes/chats");
 const groupRoute = require("./routes/groups");
 const path = require("path");
 
+// Sequelize is an Object-Relational Mapping (ORM) library for Node.js, and it allows you to interact with databases using JavaScript objects.
+
 const sequelize = require("./db/connect");
 const cors = require("cors");
 const User = require("./models/users");
@@ -33,20 +36,26 @@ const Group = require("./models/group");
 app.use(express.json());
 app.use(cors({ origin: process.env.ORIGIN_IP }));
 
+// Establish a one-to-many relationship between the User and chats models, where a user can have many chats, and each chat belongs to one user.
 User.hasMany(chats);
 chats.belongsTo(User);
+
+// Establish a many-to-many relationship between the Group and User models using an intermediary table named "UserGroups."
+// When you use belongsToMany in Sequelize, it automatically creates foreign key constraints for you.Sequelize will create two foreign key columns in the UserGroups table: GroupId and UserId. These columns will reference the primary keys of the Group and User tables, respectively.
 
 Group.belongsToMany(User, { through: "UserGroups" });
 User.belongsToMany(Group, { through: "UserGroups" });
 
+// Establish a one-to-many relationship between the Group and chats models, where a group can have many chats, and each chat belongs to one group.
 Group.hasMany(chats);
 chats.belongsTo(Group);
+
 
 app.get("/", (req, res) => {
    res.sendFile(path.join(__dirname, "public", "signup", "signup.html"));
 });
 app.get("/login", (req, res) => {
-   res.sendFile(path.join(__dirname, "public", "login", "login.html"));
+   res.sendFile(path.join(__dirname, "public", "login", "index.html"));
 });
 app.get("/whatsup", (req, res) => {
    res.sendFile(path.join(__dirname, "public", "homepage", "home.html"));
