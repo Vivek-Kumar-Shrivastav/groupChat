@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../db/connect');
 
-const UserGroups = sequelize.define('UserGroups',{
+const UserGroup = sequelize.define('UserGroups',{
     id:{
         type:DataTypes.INTEGER,
         unique:true,
@@ -12,4 +12,4 @@ const UserGroups = sequelize.define('UserGroups',{
 
 })
 
-module.exports = UserGroups
+module.exports = UserGroup

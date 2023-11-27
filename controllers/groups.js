@@ -1,5 +1,5 @@
 const Group = require("../models/group");
-const User = require("../models/users");
+const User = require("../models/user");
 const UserGroups = require("../models/userGroup");
 const Chat = require("../models/chats");
 

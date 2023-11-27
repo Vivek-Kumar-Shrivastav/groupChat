@@ -29,7 +29,7 @@ const path = require("path");
 
 const sequelize = require("./db/connect");
 const cors = require("cors");
-const User = require("./models/users");
+const User = require("./models/user");
 const chats = require("./models/chats");
 const Group = require("./models/group");
 
