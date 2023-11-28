@@ -144,7 +144,7 @@
 
                config = {
                   method: "POST",
-                  url: "http://localhost:3002/users/login",
+                  url: `${process.env.BASE_URL}/users/login`,
 
                   data: {
                      email: document.querySelector("#emailInput").value,

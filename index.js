@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const PORT = 3002;
 require("dotenv").config();
 
 // WebSocket is a communication protocol that provides full-duplex communication channels over a single TCP connection, allowing for real-time data transfer between the server and clients.
@@ -34,6 +35,7 @@ const chats = require("./models/chats");
 const Group = require("./models/group");
 
 app.use(express.json());
+
 app.use(cors({ origin: process.env.ORIGIN_IP }));
 
 // Establish a one-to-many relationship between the User and chats models, where a user can have many chats, and each chat belongs to one user.
@@ -80,7 +82,7 @@ Group.findOrCreate({ where: { groupName: process.env.GRP } })
       await sequelize.sync();
       await Group.findOrCreate({ where: { groupName: process.env.GRP } });
 
-      http.listen(3002, () => {
+      http.listen(PORT, () => {
          console.log(`server listening on port 3002`);
       });
    } catch (error) {

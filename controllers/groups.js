@@ -16,7 +16,6 @@ async function createNewGroup(req, res, next) {
       res.status(401).json({ msg: "cannot create group", err: error });
    }
 }
-
 async function getAllGroups(req, res, next) {
    try {
       let user = await User.findOne({ where: { id: req.body.userId } });
@@ -88,7 +87,6 @@ async function kickMembers2Group(req, res, next) {
       res.status(400).json({ msg: "some error occured while kicking out" });
    }
 }
-
 async function changeAdmin(req, res, next) {
    try {
       let member = await User.findOne({
